@@ -1,15 +1,24 @@
 #include "uart.h"
 
-
-UART::UART(void){
-  
+UART::UART(uint32_t bauds = 9600){
+  baud = bauds;
+  message = "";
 }
-void UART::Begin(uint16_t bauds = 9600){
-  Serial.begin(bauds);
+void UART::Begin(void){
+  Serial.begin(baud);
 }
 bool UART::Read(void){
+  if(Serial.available()){
+    char letter = Serial.read();
+    if(letter != 10)
+      message += letter;
+    else
+      return true;
+  }
   return false;
 }
 String UART::GetMessage(void){
-    return message;
+  String msg = message;
+  message = "";
+  return msg;
 }

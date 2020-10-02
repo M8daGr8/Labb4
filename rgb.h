@@ -5,16 +5,12 @@
 
 class RGB{
   public:
-    RGB(uint8_t rgbPins[3]);
+    RGB();
+    RGB(const uint8_t rgbPins[3]);
+    void SetPins(const uint8_t rgbPins[3]);
     void Begin(void);
-    void Write(uint8_t colour[3], uint8_t dir, uint8_t fadeRate);
-    bool Loop(void);
+    void Write(uint8_t values[3]);
   private:
     uint8_t pins[3];
-    uint8_t currentValues[3] = { 0, 0, 0 };
-    uint8_t desiredColour[3] = { 0, 0, 0 };
-    uint8_t dir;
-    uint8_t fadeRate;
-    uint32_t prevMillis;
 };
 #endif

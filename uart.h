@@ -5,11 +5,12 @@
 
 class UART{
   public:
-    UART(void);
-    void Begin(uint16_t bauds = 9600);
+    UART(uint32_t bauds = 9600);
+    void Begin(void);
     bool Read(void);
     String GetMessage(void);
   private:
+    uint32_t baud;
     String message;
     
 };
