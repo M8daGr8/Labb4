@@ -7,6 +7,7 @@ class UART{
   public:
     UART(uint32_t bauds = 9600);
     void Begin(void);
+    void SetBauds(uint32_t bauds);
     bool Read(void);
     String GetMessage(void);
   private:

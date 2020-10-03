@@ -1,5 +1,9 @@
+struct StateValues{
+  
+};
 
 void StateMachine(void){
+  
   /*switch(show){
       case red:
         break;
@@ -14,6 +18,16 @@ void StateMachine(void){
 
 void S(void){
 
+  rgbHandler.SetFadeRate(pot.GetValue());
+  if(btnOne.IsPressed())
+    rgbHandler.ChangeColour(red);
+  else if(btnTwo.IsPressed())
+    rgbHandler.ChangeColour(blue);
+  else
+    rgbHandler.ChangeColour(purple);
+  rgbHandler.Loop();
+
+  //
 }
 
 void CheckMode(void){

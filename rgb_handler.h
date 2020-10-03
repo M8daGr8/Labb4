@@ -11,7 +11,8 @@ enum Colour{
   green = 3,
   yellow = 4,
   orange = 5,
-  red = 6
+  red = 6,
+  rainbow = 7
 };
 
 class RGBHandler{
