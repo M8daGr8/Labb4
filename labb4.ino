@@ -8,10 +8,11 @@ void setup() {
 
 void loop(){
   serialHandler.ReadInput();
-  serialHandler.SplitInput();
-  
   pot.Read();
   btnOne.Read();
   btnTwo.Read();
+
+  StateMachine();
   
+  rgbHandler.Loop();
 }

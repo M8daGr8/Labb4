@@ -2,8 +2,8 @@
 
 RGB::RGB(){
   pins[0] = 11;
-  pins[1] = 10;
-  pins[2] = 9;
+  pins[1] = 9;
+  pins[2] = 10;
 }
 RGB::RGB(const uint8_t rgbPins[3]){
   for(uint8_t i = 0; i < sizeof(pins) / sizeof(pins[0]); i++)

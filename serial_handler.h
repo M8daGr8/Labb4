@@ -11,15 +11,15 @@ class SerialHandler{
     void Begin(void);
     void ReadInput(void);
     uint32_t GetFadeRate(void);
-    uint8_t GetColour(void);
-    void SplitInput(void);
+    Colour GetColour(void);
+    bool HasNewValues(void);
     void PrintWelcome(void);
     void PrintHelp(void);
   private:
     UART uart;
     String message;
-    uint32_t fadeRate;
     Colour colour;
+    uint32_t fadeRate;
     
     void SetColour(String desiredColour);
     void SetFadeRate(String desiredFadeRate);

@@ -11,7 +11,7 @@
 #define BUTTON_TWO 12
 #define BUTTON_THREE 2
 
-const uint8_t LEDS[] = { 11, 10, 9 };
+const uint8_t LEDS[] = { 11, 9, 10 };
 
 SerialHandler serialHandler(115200);
 Btn btnOne(BUTTON_ONE);

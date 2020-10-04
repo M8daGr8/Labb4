@@ -4,7 +4,7 @@ SerialHandler::SerialHandler(uint32_t bauds){
   uart.SetBauds(bauds);
   message = "";
   fadeRate = 5;
-  colour = 7;
+  colour = rainbow;
 }
 void SerialHandler::Begin(void){
   uart.Begin();
@@ -13,7 +13,7 @@ void SerialHandler::ReadInput(void){
   if(uart.Read())
     message = uart.GetMessage();
 }
-uint8_t SerialHandler::GetColour(void){
+Colour SerialHandler::GetColour(void){
   return colour;
 }
 uint32_t SerialHandler::GetFadeRate(void){
@@ -23,35 +23,35 @@ void SerialHandler::SetColour(String desiredColour){
   Serial.print("\tNew colour:\t");
   
   if(desiredColour.indexOf("purple") >= 0){
-    colour = 0;
+    colour = purple;
     Serial.println("Purple"); 
   }
   else if(desiredColour.indexOf("blue") >= 0){
-    colour = 1;
+    colour = blue;
     Serial.println("Blue");
   }
   else if(desiredColour.indexOf("cyan") >= 0){
-    colour = 2;
+    colour = cyan;
     Serial.println("Cyan");
   }
   else if(desiredColour.indexOf("green") >= 0){
-    colour = 3;
+    colour = green;
     Serial.println("Green");
   }
   else if(desiredColour.indexOf("yellow") >= 0){
-    colour = 4;
+    colour = yellow;
     Serial.println("Yellow");
   }
   else if(desiredColour.indexOf("orange") >= 0){
-    colour = 5;
+    colour = orange;
     Serial.println("Orange");
   }
   else if(desiredColour.indexOf("red") >= 0){
-    colour = 6;
+    colour = red;
     Serial.println("Red");
   }
   else{
-    colour = 7;
+    colour = rainbow;
     Serial.println("Rainbow"); 
   }
 }
@@ -62,19 +62,19 @@ void SerialHandler::SetFadeRate(String desiredFadeRate){
   fadeRate = number;
   Serial.println("\tNew Faderate:\t" + String(fadeRate) + " ms");
 }
-void SerialHandler::SplitInput(void){
+bool SerialHandler::HasNewValues(void){
   message.toLowerCase();
   String request = message;
   message = "";
   
   if(request == "")
-    return;
+    return false;
 
   Serial.println(">> " + request + "\n");
   
   if(request.indexOf("help") >= 0 || request[0] == 'h'){
     PrintHelp();
-    return;
+    return false;
   }
   
   if(request.indexOf("colour") >= 0){
@@ -83,7 +83,7 @@ void SerialHandler::SplitInput(void){
   }
   else{
     Serial.println("You need to choose a colour. \nType \"-help\" if you need help.\n");
-    return;
+    return false;
   }
     
   if(request.indexOf("rate") >= 0)
@@ -91,6 +91,7 @@ void SerialHandler::SplitInput(void){
   else
     SetFadeRate("5");
   Serial.println();
+  return true;
 }
 void SerialHandler::PrintWelcome(void){
   Serial.println("***Welcome to Labb4 demo***");
