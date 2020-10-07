@@ -20,35 +20,35 @@ uint32_t SerialHandler::GetFadeRate(void){
   return fadeRate;
 }
 void SerialHandler::SetColour(String desiredColour){
-  Serial.print("\tNew colour:\t");
+  Serial.print(F("\tNew colour:\t"));
   
   if(desiredColour.indexOf("purple") >= 0){
     colour = purple;
-    Serial.println("Purple"); 
+    Serial.println(F("Purple")); 
   }
   else if(desiredColour.indexOf("blue") >= 0){
     colour = blue;
-    Serial.println("Blue");
+    Serial.println(F("Blue"));
   }
   else if(desiredColour.indexOf("cyan") >= 0){
     colour = cyan;
-    Serial.println("Cyan");
+    Serial.println(F("Cyan"));
   }
   else if(desiredColour.indexOf("green") >= 0){
     colour = green;
-    Serial.println("Green");
+    Serial.println(F("Green"));
   }
   else if(desiredColour.indexOf("yellow") >= 0){
     colour = yellow;
-    Serial.println("Yellow");
+    Serial.println(F("Yellow"));
   }
   else if(desiredColour.indexOf("orange") >= 0){
     colour = orange;
-    Serial.println("Orange");
+    Serial.println(F("Orange"));
   }
   else if(desiredColour.indexOf("red") >= 0){
     colour = red;
-    Serial.println("Red");
+    Serial.println(F("Red"));
   }
   else{
     colour = rainbow;
@@ -76,13 +76,13 @@ bool SerialHandler::HasNewValues(void){
     PrintHelp();
     return false;
   }
-  
+
   if(request.indexOf("colour") >= 0){
     SetColour(request.substring((request.indexOf("colour") + String("colour ").length()), request.indexOf(";")));
     request.remove(0, request.indexOf(";") + 2);
   }
   else{
-    Serial.println("You need to choose a colour. \nType \"-help\" if you need help.\n");
+    Serial.println(F("You need to choose a colour. \nType \"-help\" if you need help.\n"));
     return false;
   }
     
@@ -93,42 +93,45 @@ bool SerialHandler::HasNewValues(void){
   Serial.println();
   return true;
 }
+
+//9280 (28%)
+//1495 (72%)
 void SerialHandler::PrintWelcome(void){
-  Serial.println("***Welcome to Labb4 demo***");
-  Serial.println("Press interrupt button to change mode.\n");
-  Serial.println(" * Mode #1:  NONE\t(You can't do anything)  <- DEFAULT");
-  Serial.println(" * Mode #2:  BUTTON\t(Only shield buttons)");
-  Serial.println("\tPOT:  Change speed");
-  Serial.println("\tKEY1: GREEN");
-  Serial.println("\tKEY2: BLUE");
-  Serial.println("\tBOTH: RED");
-  Serial.println(" * Mode #3:  SERIAL\t(Only serial inputs)");
-  Serial.println("\tSerial inputs");
-  Serial.println(" * Mode #4:  BOTH\t(Both buttons & serial)\n");
-  Serial.println("For serial help type -help in SERIAL mode");
+  Serial.println(F("***Welcome to Labb4 demo***"));
+  Serial.println(F("Press interrupt button to change mode.\n"));
+  Serial.println(F(" * Mode #1:  NONE\t(You can't do anything)  <- DEFAULT"));
+  Serial.println(F(" * Mode #2:  BUTTON\t(Only shield buttons)"));
+  Serial.println(F("\tPOT:  Change speed"));
+  Serial.println(F("\tKEY1: GREEN"));
+  Serial.println(F("\tKEY2: BLUE"));
+  Serial.println(F("\tBOTH: RED"));
+  Serial.println(F(" * Mode #3:  SERIAL\t(Only serial inputs)"));
+  Serial.println(F("\tSerial inputs"));
+  Serial.println(F(" * Mode #4:  BOTH\t(Both buttons & serial)\n"));
+  Serial.println(F("For serial help type -help in SERIAL mode"));
   Serial.println();
 }
 void SerialHandler::PrintHelp(void){
-  Serial.println("***Serial input Help***");
-  Serial.println("-help : This menu");
+  Serial.println(F("***Serial input Help***"));
+  Serial.println(F("-help : This menu"));
   
-  Serial.println("-colour (parameter); : Select fading colour (REQ)");
-  Serial.println("\t(parameter:string)");
-  Serial.println("\t\tred     : red color fade");
-  Serial.println("\t\tgreen   : green color fade");
-  Serial.println("\t\tblue    : blue color fade");
-  Serial.println("\t\tpurple  : purple color fade");
-  Serial.println("\t\tyellow  : yellow color fade");
-  Serial.println("\t\torange  : orange color fade");
-  Serial.println("\t\tcyan    : blue color fade");
-  Serial.println("\t\trainbow : rainbow color fade <- DEFAULT");
+  Serial.println(F("-colour (parameter); : Select fading colour (REQ)"));
+  Serial.println(F("\t(parameter:string)"));
+  Serial.println(F("\t\tred     : red color fade"));
+  Serial.println(F("\t\tgreen   : green color fade"));
+  Serial.println(F("\t\tblue    : blue color fade"));
+  Serial.println(F("\t\tpurple  : purple color fade"));
+  Serial.println(F("\t\tyellow  : yellow color fade"));
+  Serial.println(F("\t\torange  : orange color fade"));
+  Serial.println(F("\t\tcyan    : blue color fade"));
+  Serial.println(F("\t\trainbow : rainbow color fade <- DEFAULT"));
   
-  Serial.println("-rate (parameter); : Select fading speed in ms(OPT)");
-  Serial.println("\t(parameter:uint)");
-  Serial.println("\t\t5 : 5 ms  <- DEFAULT");
-  Serial.println("\t\tuint : (your choice ms)");
+  Serial.println(F("-rate (parameter); : Select fading speed in ms(OPT)"));
+  Serial.println(F("\t(parameter:uint)"));
+  Serial.println(F("\t\t5 : 5 ms  <- DEFAULT"));
+  Serial.println(F("\t\tuint : (your choice ms)"));
   Serial.println();
-  Serial.println("Example: -colour red -rate 10");
-  Serial.println("\t\t->Fading red with faderate 10 ms.");
+  Serial.println(F("Example: -colour red -rate 10"));
+  Serial.println(F("\t\t->Fading red with faderate 10 ms."));
   Serial.println();
 }

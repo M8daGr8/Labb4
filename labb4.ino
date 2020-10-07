@@ -7,6 +7,8 @@ void setup() {
 }
 
 void loop(){
+  CheckInterruptTime();
+  
   serialHandler.ReadInput();
   pot.Read();
   btnOne.Read();

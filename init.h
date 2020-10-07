@@ -4,12 +4,12 @@
 #include "rgb_handler.h"
 #include "serial_handler.h"
 
-#include "interrupt.h"
-
 #define POT_PIN A0
 #define BUTTON_ONE 8
 #define BUTTON_TWO 12
 #define BUTTON_THREE 2
+
+#include "interrupt.h"
 
 const uint8_t LEDS[] = { 11, 9, 10 };
 
@@ -19,7 +19,6 @@ Btn btnTwo(BUTTON_TWO);
 Pot pot(POT_PIN);
 RGBHandler rgbHandler(LEDS);
 
-
 void InitSerial(){
   serialHandler.Begin();
   serialHandler.PrintWelcome();
@@ -27,7 +26,8 @@ void InitSerial(){
   serialHandler.PrintHelp();  
 }
 void InitPins(void){  
-  attachInterrupt(digitalPinToInterrupt(BUTTON_THREE), Debounce, FALLING);
+  pinMode(BUTTON_THREE, INPUT);
+  attachInterrupt(digitalPinToInterrupt(BUTTON_THREE), SetInterruptTime, RISING);
   btnOne.Begin();
   btnTwo.Begin();
   pot.Begin();

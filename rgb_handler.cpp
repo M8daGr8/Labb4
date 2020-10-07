@@ -38,7 +38,7 @@ void RGBHandler::Loop(void){
     
     rgb.Write(currentValues);
     
-    sameColour = true;
+    sameColour = false;
     prevMillis = millis();
   }
 }

@@ -8,19 +8,19 @@ enum Mode {
 Mode mode = none;
 
 void PrintMode(){
-  Serial.print("Current mode: ");
+  Serial.print(F("Current mode: "));
   switch(mode){
     case none:
-      Serial.println("NONE");
+      Serial.println(F("NONE"));
       break;
     case button:
-      Serial.println("BUTTON");
+      Serial.println(F("BUTTON"));
       break;
     case serial:
-      Serial.println("SERIAL");
+      Serial.println(F("SERIAL"));
       break;
     default:
-      Serial.println("BUTTON & SERIAL");
+      Serial.println(F("BUTTON & SERIAL"));
       break;
   }
   Serial.println();
@@ -43,12 +43,18 @@ void ChangeMode(){
   }
   PrintMode();
 }
-void Debounce(void){
-  unsigned long timeNow = millis();
-  static unsigned long prevMillis = timeNow;
-  
-  if(timeNow - prevMillis >= 15){
-    ChangeMode();
+
+unsigned long hToLMillis = 0;
+unsigned long prevMillis = 0;
+
+void SetInterruptTime(void){
+  hToLMillis = millis();
+}
+void CheckInterruptTime(void){
+  if(hToLMillis - prevMillis >= 20){
+    if(!digitalRead(BUTTON_THREE)){
+      ChangeMode();
+      prevMillis = hToLMillis;
+    } 
   }
-  prevMillis = timeNow;
 }

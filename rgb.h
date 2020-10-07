@@ -5,7 +5,7 @@
 
 class RGB{
   public:
-    RGB();
+    RGB(void);
     RGB(const uint8_t rgbPins[3]);
     void SetPins(const uint8_t rgbPins[3]);
     void Begin(void);
